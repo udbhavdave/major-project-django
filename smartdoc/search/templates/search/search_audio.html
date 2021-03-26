@@ -1,0 +1,19 @@
+{% extends "search/layout.html" %} 
+{% block title %}Smart Doc Search{%endblock%} 
+{% block body %}
+
+<form action="{% url 'search-audio' %}" method="post">
+  {% csrf_token %} 
+  {{ search.as_p }}
+  <input type="submit" value="search"/>
+</form>
+
+<h1>Audio Files:</h1>
+{% for pic in pics %}
+<img src="{{pic.audio_file.url}}" alt="not available" />
+{% endfor %} 
+
+{% if message %}
+<h3>{{ message }}</h3>
+{% endif %} 
+{% endblock %} 
