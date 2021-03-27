@@ -1,1 +1,1 @@
-web: gunicorn smartdoc.wsgi:application
+web: gunicorn wsgi:application
