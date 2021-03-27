@@ -1,1 +1,1 @@
-web: python smartdoc/manage.py run_gunicorn
+web: PYTHONPATH=`pwd`/smartdoc gunicorn --bind 0.0.0.0:8000 smartdoc.wsgi:application
