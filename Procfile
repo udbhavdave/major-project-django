@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:8000 smartdoc.smartdoc.wsgi:application
+web: python manage.py run_gunicorn
