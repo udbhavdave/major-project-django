@@ -1,19 +1,42 @@
 {% extends "search/layout.html" %} 
+{% load static %}
 {% block title %}Smart Doc Search{%endblock%} 
 {% block body %}
-
-<form action="{% url 'search-image' %}" method="post">
-  {% csrf_token %} 
-  {{ search.as_p }}
-  <input type="submit" value="search"/>
-</form>
-
-<h1>Image Files:</h1>
-{% for pic in pics %}
-<img src="{{pic.image_file.url}}" alt="not available" />
-{% endfor %} 
-
-{% if message %}
-<h3>{{ message }}</h3>
-{% endif %} 
-{% endblock %} 
+    <header class="hdr">
+        <span>SDS</span>
+        <a href="/">HOME</a>
+    </header>
+    <div class="container">
+        <div class="row">
+            <form action="{% url 'search-image' %}" method="POST" class="frm">
+              {% csrf_token %}
+                <div class="rht">
+                    <i class="fa fa-search"></i>
+                    <input type="text" name="search" placeholder="Search Keyword!" autocomplete="off">
+                    <input type="submit" name="submit" value="SEARCH" class="btn btn-success sub"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h1 class="cnt">Gallery</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for pic in pics %}
+                <div class="col-md-4 dis">
+                    <img src="{{pic.image_file.url}}" alt="image" onclick="onClick(this)">
+                </div>
+            {% endfor %} 
+            
+            <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+                <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+                <div class="w3-modal-content w3-animate-zoom">
+                  <img id="img01" style="width:100%">
+                </div>
+              </div>
+        </div>
+    </div>
+{% endblock %}
