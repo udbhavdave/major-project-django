@@ -47,6 +47,7 @@ PyGithub
 Pygments
 PyJWT
 pyparsing
+PyPDF2
 pyquery
 pytesseract
 python-dotenv

@@ -24,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = str(os.getenv('SECRET_KEY'))
-SECRET_KEY = 'dfzb540*w5&h4aqav&gh(-x^)*s3&h3#46^n=xsb0dno2+_!*p'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG") and True
 
 ALLOWED_HOSTS = ['*']
 
@@ -108,54 +108,54 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    # 'formatters': {
-    #     'console': {
-    #         'format': '%(name)-12s %(levelname)-8s %(message)s',
-    #         'style': '{'
-    #     },
-    #     'file': {
-    #         'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-    #         'style': '{'
-    #     }
-    # },
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-        'require_debug_false': {
-        '()': 'django.utils.log.RequireDebugFalse',
-        }   
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            # 'formatter': 'console',
-        },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filters': ['require_debug_true'],
-            # 'formatter': 'file',
-            'filename': os.path.join(BASE_DIR, 'server_error.log'),
-        },
-        'mail_admins': {
-            'level': 'DEBUG',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'filters': [],
-            'include_html': True,
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     # 'formatters': {
+#     #     'console': {
+#     #         'format': '%(name)-12s %(levelname)-8s %(message)s',
+#     #         'style': '{'
+#     #     },
+#     #     'file': {
+#     #         'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+#     #         'style': '{'
+#     #     }
+#     # },
+#     'filters': {
+#         'require_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         },
+#         'require_debug_false': {
+#         '()': 'django.utils.log.RequireDebugFalse',
+#         }   
+#     },
+#     'handlers': {
+#         # 'console': {
+#         #     'class': 'logging.StreamHandler',
+#         #     # 'formatter': 'console',
+#         # },
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filters': ['require_debug_false'],
+#             # 'formatter': 'file',
+#             'filename': os.path.join(BASE_DIR, 'logs/server_error.log'),
+#         },
+#         'mail_admins': {
+#             'level': 'DEBUG',
+#             'class': 'django.utils.log.AdminEmailHandler',
+#             'filters': [],
+#             'include_html': True,
+#         }
+#     },
+#     'loggers': {
+#         'django.request': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -183,11 +183,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 ADMINS = [('Udbhav', 'udbhavdave@gmail.com'),('admin','d3bbcf86df-627722@inbox.mailtrap.io')]
-SERVER_EMAIL = 'udbhavdave@gmail.com'
-EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '138c156df62fdd'
-EMAIL_HOST_PASSWORD = 'ac3b04f2371916'
-EMAIL_PORT = '2525'
+SERVER_EMAIL = os.environ.get("SERVER_EMAIL")
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+
+#  Django 3.2 changes
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 if not DEBUG:
     import django_heroku

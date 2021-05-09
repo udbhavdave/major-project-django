@@ -47,6 +47,7 @@ PyGithub==1.54.1
 Pygments==2.8.1
 PyJWT==1.7.1
 pyparsing==2.4.7
+PyPDF2==1.26.0
 pyquery==1.4.3
 pytesseract==0.3.7
 python-dotenv==0.17.0

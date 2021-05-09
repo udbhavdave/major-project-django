@@ -9,7 +9,7 @@ from .models import *
 #         fields = ['image']
 
 class UploadForm(forms.Form):
-    upload=forms.FileField(required=False)
+    upload_file=forms.FileField(required=False)
 
 
 class SearchForm(forms.Form):

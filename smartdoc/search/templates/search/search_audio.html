@@ -1,19 +1,47 @@
 {% extends "search/layout.html" %} 
+{% load static %}
 {% block title %}Smart Doc Search{%endblock%} 
 {% block body %}
-
-<form action="{% url 'search-audio' %}" method="post">
-  {% csrf_token %} 
-  {{ search.as_p }}
-  <input type="submit" value="search"/>
-</form>
-
-<h1>Audio Files:</h1>
-{% for pic in pics %}
-<img src="{{pic.audio_file.url}}" alt="not available" />
-{% endfor %} 
-
-{% if message %}
-<h3>{{ message }}</h3>
-{% endif %} 
-{% endblock %} 
+    <header class="hdr">
+        <span>SDS</span>
+        <a href="/">HOME</a>
+    </header>
+    <div class="container">
+        <div class="row">
+            <form action="{% url 'search-audio' %}" method="POST" class="frm">
+              {% csrf_token %}
+                <div class="rht">
+                    <i class="fa fa-search"></i>
+                    <input type="text" name="search" placeholder="Search Keywords!" autocomplete="off" value="{{search_text}}" maxlength="100">
+                    <input type="submit" name="submit" value="SEARCH" class="btn btn-success sub"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <div class="row">
+            <h1 class="cnt">Audio Files</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for audio in audio_list %}
+                <div class="col-md-4 dis mb-4">
+                    <audio id="player" controls>
+                        <source src="{{audio.audio_file.url}}" type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="text-center">{{audio.title}}</p>
+                    <!-- <a href="">Read transcripts</a> -->
+                </div>
+            {% endfor %} 
+            
+            <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+                <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+                <div class="w3-modal-content w3-animate-zoom">
+                  <img id="img01" style="width:100%">
+                </div>
+              </div>
+        </div>
+    </div>
+{% endblock %}

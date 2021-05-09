@@ -1,11 +1,9 @@
 function onClick(element) {
     document.getElementById("img01").src = element.src;
     document.getElementById("modal01").style.display = "block";
-  }
+}
 
-
-
-var _validFileExtensions = [".jpg", ".jpeg", ".png"]; 
+var _validFileExtensions = [".jpg", ".jpeg", ".png", ".wav"]; 
 
 function change(){
     // var fu1 = document.getElementById("fle").value;

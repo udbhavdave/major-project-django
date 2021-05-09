@@ -12,22 +12,23 @@
               {% csrf_token %}
                 <div class="rht">
                     <i class="fa fa-search"></i>
-                    <input type="text" name="search" placeholder="Search Keyword!" autocomplete="off">
+                    <input type="text" name="search" placeholder="Search Keywords!" autocomplete="off" value="{{search_text}}" maxlength="100">
                     <input type="submit" name="submit" value="SEARCH" class="btn btn-success sub"/>
                 </div>
             </form>
         </div>
     </div>
-    <div class="container">
+    <div class="container mb-5">
         <div class="row">
-            <h1 class="cnt">Gallery</h1>
+            <h1 class="cnt">Image Files</h1>
         </div>
     </div>
     <div class="container">
         <div class="row">
             {% for pic in pics %}
-                <div class="col-md-4 dis">
-                    <img src="{{pic.image_file.url}}" alt="image" onclick="onClick(this)">
+                <div class="col-md-4 dis mb-4">
+                    <img class="" src="{{pic.image_file.url}}" title="{{pic.title}}" alt="image {{pic.title}}" onclick="onClick(this)">
+                    <figcaption class="text-center">{{pic.title}}</figcaption>
                 </div>
             {% endfor %} 
             

@@ -4,36 +4,38 @@
 {% block body %}
     <header class="hdr">
         <span>Smart DOC Search</span>
-        <a href="{% url 'search-image' %}">DISPLAY</a>
+        <a href="{% url 'search-image' %}">IMAGES</a>
+        <a href="{% url 'search-audio' %}">AUDIO</a>
     </header>
     <div class="container">
         <div class="row">
-            <h1 class="cnt">Upload Image</h1>
+            <h1 class="cnt">Upload File</h1>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data" onsubmit="return Validate(this);">
+            <form action="{% url 'index' %}" method="POST" enctype="multipart/form-data" onsubmit="return Validate(this);">
                 {% csrf_token %}
                 <div class="upl">
-                    <input type="file" name="avatar" class="fle" id="fle" onchange="change()" />
-                    <label tabindex="0" for="my-file" class="fle-trigger">Select a file...</label>
+                    <input type="file" name="upload_file" class="fle" id="fle" onchange="change()" />
+                    <label tabindex="0" for="fle" class="fle-trigger">Select a file...</label>
                     <p class="file-return" id="file-return"></p>
                     <input type="submit" name="submit" class="btn btn-success sub" />
                 </div>
                 <div class="emsg" id="msg"></div>
                 <div class="smsg" id="smsg" onchange="hide()">
-                    
+
                 </div>
             </form>
         </div>
     </div>
+    <div class="smsg text-center">{{message}}</div>
     <div id="spinner" style="display: none;" class="spin">
         <img src="{% static 'search/img/spin.gif' %}" alt="loading"/>
         <div>
-            <span class="org">Processing Your Image!!</span>
+            <span class="org">Processing Your File!!</span>
             <span>It may take minutes...</span>
         </div>
-        
     </div>
+
 {% endblock %} 
