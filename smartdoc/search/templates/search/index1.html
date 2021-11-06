@@ -1,0 +1,15 @@
+
+{% extends "search/layout.html" %} 
+{% block title %}Smart Doc Search{%endblock%} 
+{% block body %}
+
+<h1>Welcome !!</h1>
+<form enctype="multipart/form-data" action="{% url 'upload' %}" method="post">
+  {% csrf_token %} 
+  {{ upload.as_p }}
+  <input type="submit" value="upload"/>
+</form>
+
+<a href="{% url 'search-image' %}"><button>Image</button></a>
+<a href="{% url 'search-audio' %}"><button>Audio</button></a>
+{% endblock %} 

@@ -1,0 +1,43 @@
+{% extends "search/layout.html" %} 
+{% load static %}
+{% block title %}Smart Doc Search{%endblock%} 
+{% block body %}
+    <header class="hdr">
+        <span>SDS</span>
+        <a href="/">HOME</a>
+    </header>
+    <div class="container">
+        <div class="row">
+            <form action="{% url 'search-image' %}" method="POST" class="frm">
+              {% csrf_token %}
+                <div class="rht">
+                    <i class="fa fa-search"></i>
+                    <input type="text" name="search" placeholder="Search Keywords!" autocomplete="off" value="{{search_text}}" maxlength="100">
+                    <input type="submit" name="submit" value="SEARCH" class="btn btn-success sub"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <div class="row">
+            <h1 class="cnt">Image Files</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for pic in pics %}
+                <div class="col-md-4 dis mb-4">
+                    <img class="" src="{{pic.image_file.url}}" title="{{pic.title}}" alt="image {{pic.title}}" onclick="onClick(this)">
+                    <figcaption class="text-center">{{pic.title}}</figcaption>
+                </div>
+            {% endfor %} 
+            
+            <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+                <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+                <div class="w3-modal-content w3-animate-zoom">
+                  <img id="img01" style="width:100%">
+                </div>
+              </div>
+        </div>
+    </div>
+{% endblock %}
